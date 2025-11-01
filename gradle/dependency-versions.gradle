@@ -1,0 +1,23 @@
+ext {
+    // 🔹 Plugin versions
+    pluginVersions = [
+            springBoot           : '3.3.5',
+            dependencyManagement : '1.1.5',
+            jacoco               : '0.8.10'
+    ]
+
+    // 🔹 Tool versions (for build/test utilities)
+    toolVersions = [
+            junit     : '5.10.2',
+            mockito   : '5.11.0'
+    ]
+
+    // 🔹 Library versions (for main dependencies)
+    libraryVersions = [
+            springBootStarter : '3.3.5',
+            mysql             : '8.0.33',
+            h2                : '2.2.224'
+    ]
+}
+
+
