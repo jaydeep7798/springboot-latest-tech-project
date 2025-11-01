@@ -7,13 +7,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
+@SpringBootTest  //It is used to create and load the full Spring application context for integration testing — meaning it tests how multiple components (controllers, services, repositories, etc.)
+// work together in a Spring Boot application.
 class CalculatorServiceImplSpringTest {
 
     @Autowired
     private CalculatorServiceImpl calculatorService;
 
-    @Test
+    @Test // Unit Testing
     void testAdd() {
         assertEquals(8, calculatorService.add(3, 5));
     }
