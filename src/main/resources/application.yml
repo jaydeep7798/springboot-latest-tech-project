@@ -3,21 +3,42 @@ spring:
     name: calculator-demo
 
   datasource:
-    url: jdbc:h2:mem:testdb
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
+    url: jdbc:postgresql://localhost:5432/batch_ops        # <-- your Postgres DB
+    driver-class-name: org.postgresql.Driver
+    username: postgres                                # <-- your username
+                               # <-- your password
+
+    hikari:                                             # Optional but recommended
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 30000
+      max-lifetime: 1800000
+      pool-name: PostgresHikariCP
+
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     show-sql: true
     properties:
       hibernate:
         format_sql: true
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+
+
+  batch:
+    jdbc:
+      initialize-schema: always  # Creates Spring Batch metadata tables
+
+# Remove H2 console since you are not using H2 anymore
+# h2:
+#   console:
+#     enabled: true
+#     path: /h2-console
 
 server:
   port: 8080
@@ -27,3 +48,9 @@ logging:
     root: INFO
     org.springframework: INFO
     org.example: DEBUG
+
+batch:
+  csv:
+    file-path: C:/Users/JAYDEEP/IdeaProjects/springboot-latest-tech-project/src/main/resources/customers.csv
+
+
